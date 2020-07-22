@@ -1,9 +1,21 @@
 const mongoose = require('mongoose');
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLInt, GraphQLString} = graphql;
+const { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList, GraphQLFloat} = graphql;
 
-const AddressDataType = new GraphQLObjectType({
-    name: 'AddressData',
+const GeoType = new GraphQLObjectType({
+    name: 'Geo',
+    fields: () => ({
+      type: {
+        type: GraphQLString
+      },
+      coordinates: {
+        type: new GraphQLList(GraphQLFloat)
+      },
+    }),
+  })
+
+const AddressType = new GraphQLObjectType({
+    name: 'Address',
     fields: {
         street1: {type: GraphQLString},
         city: {type: GraphQLString},
@@ -12,10 +24,11 @@ const AddressDataType = new GraphQLObjectType({
     }
 })
 
-const AddressType = new GraphQLObjectType({
-    name: 'Address',
+const LocationType = new GraphQLObjectType({
+    name: 'Location',
     fields: {
-        address: {type: AddressDataType}
+        address: {type: AddressType},
+        geo: { type: GeoType}
     }
 });
 
@@ -23,7 +36,7 @@ const TheaterType = new GraphQLObjectType({
     name: 'TheaterType',
     fields: () => ({
         theaterId: {type: GraphQLInt},
-        location: { type: AddressType},
+        location: { type: LocationType},
     })
 })
 
