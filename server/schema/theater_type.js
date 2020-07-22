@@ -2,13 +2,20 @@ const mongoose = require('mongoose');
 const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLInt, GraphQLString} = graphql;
 
+const AddressDataType = new GraphQLObjectType({
+    name: 'AddressData',
+    fields: {
+        street1: {type: GraphQLString},
+        city: {type: GraphQLString},
+        state: {type: GraphQLString},
+        zipcode: {type: GraphQLString},
+    }
+})
+
 const AddressType = new GraphQLObjectType({
     name: 'Address',
     fields: {
-      street: {type: GraphQLString},
-      city: {type: GraphQLString},
-      state: {type: GraphQLString},
-      zipcode: {type: GraphQLString},
+        address: {type: AddressDataType}
     }
 });
 
