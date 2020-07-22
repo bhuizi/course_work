@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const graphql = require('graphql');
-const { GraphQLObjectType, GraphQLID, GraphQLInt, GraphQLNonNull } = graphql;
+const { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLInt, GraphQLNonNull } = graphql;
 const CommentType = require('./comment_type');
 const TheaterType = require('./theater_type');
 const UserType = require('./user_type');
@@ -15,22 +15,34 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parentValue, { id }) {
+      resolve(_, { id }) {
         return User.findById(id);
       },
     },
     theater: {
         type: TheaterType,
         args: {id: { type: new GraphQLNonNull(GraphQLID)}},
-        resolve(parentValue, {id}){
+        resolve(_, {id}){
             return Theater.findById(id)
         }
+    },
+    theaters: {
+      type: new GraphQLList(TheaterType),
+      resolve(){
+        return Theater.find({});
+      }
     },
     comment: {
       type: CommentType,
       args: { id: { type: new GraphQLNonNull(GraphQLID)}},
-      resolve(parentValue, {id}){
+      resolve(_, {id}){
         return Comment.findById(id)
+      }
+    },
+    comments: {
+      type: new GraphQLList(CommentType),
+      resolve(){
+        return Comment.find({});
       }
     }
   }),
