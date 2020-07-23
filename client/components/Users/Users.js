@@ -26,8 +26,8 @@ function Users() {
       {loading ? (
           <div>Loading..</div>
       ):
-      <ul>
-          ({users.map(({name, email}) => <li>{name} : {email}</li>)})
+      <ul className="collection">
+          {users.map(({name, email}) => <li className="collection-item">{name} : {email}</li>)}
       </ul>
       }
     </section>
