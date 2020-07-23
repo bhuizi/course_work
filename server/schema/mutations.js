@@ -21,6 +21,16 @@ const mutations = new GraphQLObjectType({
           return User.findById(args.id).update({...args})
       }
     },
+    updateComment: {
+      type: CommentType,
+      args: {
+        id: { type: GraphQLID},
+        text: { type: GraphQLString}
+      },
+      resolve(_, {id, text}){
+        return Comment.findById(id).update({text})
+      }
+    }
 
   },
 });

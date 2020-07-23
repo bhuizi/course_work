@@ -19,6 +19,12 @@ const RootQuery = new GraphQLObjectType({
         return User.findById(id);
       },
     },
+    users: {
+      type: new GraphQLList(UserType),
+      resolve() {
+        return User.find({})
+      },
+    },
     theater: {
         type: TheaterType,
         args: {id: { type: new GraphQLNonNull(GraphQLID)}},

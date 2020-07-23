@@ -1,37 +1,70 @@
-//  query{
-//        theater(id: "59a47286cfa9a3a73e51e72d"){
-//          theaterId
-//          location {
-//           address {
-//             street1
-//             city
-//             state
-//             zipcode
-//           }
-//            geo{
-//              coordinates
-//            }
-//          }
-//        }
-//      }
+ query{
+   user(id: "59b99db4cfa9a34dcd7885b6"){
+     email
+     password
+   }
+ }
+
+ query{
+   theater(id: "59a47286cfa9a3a73e51e72d"){
+     theaterId
+     location {
+      address {
+        street1
+        city
+        state
+        zipcode
+      }
+       geo{
+         coordinates
+       }
+     }
+   }
+ }
+
+query{
+  comment(id: "5a9427648b0beebeb69579cc"){
+    name
+    movie_id
+    text
+  }
+}
+
+ mutation {
+   updateComment(id: "5a9427648b0beebeb69579cc", text: "hello world"){
+     name
+     movie_id
+     text
+   }
+ }
+
+ query {
+   theaters{
+     theaterId
+   }
+ }
+
+ query{
+   comments{
+     name
+     text
+     date
+   }
+ }
+
+ query	{
+   user(id: "59b99db4cfa9a34dcd7885b6"){
+     name
+     email
+     password
     
-//      query{
-//        comment(id: "5a9427648b0beebeb69579cc"){
-//          name
-//          movie_id
-//        }
-//      }
-    
-//      query {
-//        theaters{
-//          theaterId
-//        }
-//      }
-    
-//     query{
-//       comments{
-//         name
-//         text
-//         date
-//       }
-//     }
+   }
+ }
+
+ mutation{
+   updateUser(id:"59b99db4cfa9a34dcd7885b6", name:"Ned Stark"){
+     id
+     email
+ 		password
+   }
+ }
